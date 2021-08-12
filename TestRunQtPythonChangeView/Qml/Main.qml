@@ -19,38 +19,6 @@ ApplicationWindow{
     Material.theme: Material.Dark
     Material.accent: Material.LightBlue
 
-    QtObject {
-        id: internal
-        property string user: "Ras"
-        property string pass: "123"
-
-        function checkLogin(username, password) {
-            if(username === user && password === pass){
-                var component = Qt.createComponent("Home.qml")
-                var win = component.createObject()
-                win.show()
-                visible = false
-            } else{
-
-                if(username !== user){
-                    usernameField.Material.foreground = Material.Pink
-                    usernameField.Material.accent = Material.Pink
-                } else {
-                    usernameField.Material.foreground = Material.LightBlue
-                    usernameField.Material.accent = Material.LightBlue
-                }
-
-                if(password !== pass){
-                    passwordField.Material.foreground = Material.Pink
-                    passwordField.Material.accent = Material.Pink
-                } else {
-                    passwordField.Material.foreground = Material.LightBlue
-                    passwordField.Material.accent = Material.LightBlue
-                }
-            }
-        }
-    }
-
     Rectangle {
         id: topBar
         height: 40
@@ -121,12 +89,13 @@ ApplicationWindow{
     Button{
         id:buttonLogin
         width: 300
+        checked: false
         text: qsTr("Login")
         anchors.top: checkBox.bottom
         anchors.topMargin: 10
         anchors.horizontalCenter: parent.horizontalCenter
         onPressed: {
-            Con.checkLogin(usernameField.text, passwordField.text)
+            Con.checkLogin(usernameField.text, passwordField.text, buttonLogin.checked)
         }
     }
 
