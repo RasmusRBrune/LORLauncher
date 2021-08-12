@@ -24,17 +24,20 @@ class MainWindow(QObject):
 
     @Slot(str, str)
     def checkLogin(self, user, passw):
-        url = 'http://192.168.4.110:48935/api/Users/Login'
-        data = {
+        url = 'http://192.168.4.231:48935/api/Users/Login'
+
+        headers = {'content-type':'application/json'}
+
+        body = {
             'Username': user,
             'Password': passw
         }
-        print(data)
-        r = requests.post(url, json.dumps(data))
-        print(r)
-        token = r.text
-        print("My token is : " + token)
 
+        data=json.dumps(body, separators=(',',':'))
+
+        r=requests.post(url=url, data=data, headers=headers)
+
+        print(r.text)
 
     @Slot(bool)
     def closewindow(self, isChecked):
