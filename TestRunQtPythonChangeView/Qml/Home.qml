@@ -41,25 +41,52 @@ ApplicationWindow{
     Button{
         id:buttonLogin
         width: 300
-        text: qsTr("Login")
+        text: qsTr("change view")
+        checked: true
         anchors.top: topBar.bottom
         anchors.topMargin: 10
         anchors.horizontalCenter: parent.horizontalCenter
         onPressed: {
-            Con.checkLogin(usernameField.text, passwordField.text)
+            console.log(buttonLogin.checked);
+            Con.changeview(buttonLogin.checked)
         }
     }
 
-    Rectangle{
-        id: views
-        height: 35
-        color: Material.color(Material.red)
-
+    Item{
+        id:view1
+        anchors.topMargin: 10
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.top: buttonLogin.bottom
+        Rectangle{
+            id:gameview
+            width: 100
+            height: 100
+            
+            color: Material.color(Material.red)
+        }
     }
 
-    
+    Item{
+        id:view2
+        anchors.topMargin: 10
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.top: buttonLogin.bottom
+        visible: false
+        Rectangle{
+            id: storeview
+            width: 100
+            height: 100
+            color: Material.color(Material.Blue)
+        }
+    }    
 
     Connections{
         target: Con
+
+        function onViewIsVisible(viewIsVisible){
+            console.log(viewIsVisible);
+            view1.visible = !viewIsVisible
+            view2.visible = viewIsVisible
+        }
     }
 }

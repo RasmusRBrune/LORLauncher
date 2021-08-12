@@ -15,6 +15,8 @@ class MainWindow(QObject):
     
     isVisible = Signal(bool)
 
+    viewIsVisible = Signal(bool)
+
     username = Signal(str)
 
     @Slot()
@@ -38,8 +40,12 @@ class MainWindow(QObject):
 
     @Slot(bool)
     def closewindow(self, isChecked):
-        print("Is rectangle visible: ", isChecked)
         self.isVisible.emit(isChecked)
+
+    @Slot(bool)
+    def changeview(self, viewvisible):
+        print("Is view visible:", viewvisible)
+        self.viewIsVisible.emit(viewvisible)
 
 
 if __name__ == "__main__":
