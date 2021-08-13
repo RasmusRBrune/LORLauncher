@@ -48,7 +48,7 @@ ApplicationWindow{
         anchors.horizontalCenter: parent.horizontalCenter
         onPressed: {
             console.log(buttonLogin.checked);
-            Con.changeview(buttonLogin.checked)
+            ConHome.changeview(buttonLogin.checked)
         }
     }
 
@@ -81,7 +81,7 @@ ApplicationWindow{
     }    
 
     Connections{
-        target: Con
+        target: ConHome
 
         function onViewIsVisible(viewIsVisible){
             console.log(viewIsVisible);

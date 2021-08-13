@@ -3,7 +3,9 @@ import os
 import http.client, urllib.parse
 import requests
 import json
+import Home
 
+#from TestRunQtPythonChangeView.py.Home import HomeWindow
 from PySide6.QtGui import *
 from PySide6.QtQml import QQmlApplicationEngine
 from PySide6.QtCore import *
@@ -52,12 +54,14 @@ class MainWindow(QObject):
 
 
 if __name__ == "__main__":
-
+    
     main = MainWindow() 
+    home = Home.HomeWindow()
     app = QGuiApplication(sys.argv)
     engine = QQmlApplicationEngine()
    
-    engine.rootContext().setContextProperty("Con",main)
+    engine.rootContext().setContextProperty("ConMain",main)
+    engine.rootContext().setContextProperty("ConHome",home)
     engine.load(os.path.join(os.path.dirname(__file__), "../Qml/Main.qml"))
     if not engine.rootObjects():
         sys.exit(-1)

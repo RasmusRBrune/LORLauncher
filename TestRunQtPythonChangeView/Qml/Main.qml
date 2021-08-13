@@ -126,7 +126,7 @@ ApplicationWindow{
         anchors.topMargin: 10
         anchors.horizontalCenter: parent.horizontalCenter
         onPressed: {
-            Con.checkLogin(usernameField.text, passwordField.text)
+            ConMain.checkLogin(usernameField.text, passwordField.text)
         }
     }
 
@@ -140,13 +140,13 @@ ApplicationWindow{
         anchors.topMargin: 10
         anchors.horizontalCenter: parent.horizontalCenter
         onPressed: {
-            Con.on_qml_mouse_clicked()
-            Con.closewindow(buttonTestForPythonCode.checked)
+            ConMain.on_qml_mouse_clicked()
+            ConMain.closewindow(buttonTestForPythonCode.checked)
         }
     }
 
     Connections{
-        target: Con
+        target: ConMain
 
         function onIsVisible(isVisible){
             window.visible = isVisible
