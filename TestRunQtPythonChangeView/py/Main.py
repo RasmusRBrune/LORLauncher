@@ -22,31 +22,6 @@ class MainWindow(QObject):
     ###############################
 
     #DEFENITIONS
-
-    @Slot(str, str, bool)
-    def checkLogin(self, user, passw, closeWindow):
-        #API URL
-        url = 'http://192.168.4.231:48935/api/Users/Login'
-        #HEADERS
-        headers = {'content-type':'application/json'}
-        #BODY TO POST
-        body = {
-            'Username': user,
-            'Password': passw
-        }
-        #STRINGIFY JSON BODY FOR API
-        data=json.dumps(body, separators=(',',':'))
-        #REQUEST POST FOR LOGIN
-        r=requests.post(url=url, data=data, headers=headers)
-        #SAVE TOKEN
-        self.token = int(r.text)
-        print(self.token) # USED FOR CHECKING # SAVE FOR LATER
-
-        #WINDOW ON CHANGE IF USER LOGIN RETURNS A TOKEN
-        if self.token != "0" and self.token != "" and self.token != "null":
-            engine.load(os.path.join(os.path.dirname(__file__), "../Qml/Home.qml"))
-            self.isVisible.emit(closeWindow)
-
     @Slot(bool)
     def changeview(self, viewvisible):
         print("Is view visible:", viewvisible)

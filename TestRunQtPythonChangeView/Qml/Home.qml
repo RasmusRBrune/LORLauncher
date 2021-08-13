@@ -85,6 +85,7 @@ ApplicationWindow{
             right: parent.right
             top: parent.top   
         }
+        
         Item{
 
         }
