@@ -1,6 +1,5 @@
 import sys
 import os
-import http.client, urllib.parse
 import requests
 import json
 import Home
@@ -15,43 +14,47 @@ class MainWindow(QObject):
     def __init__(self):
         QObject.__init__(self)
     
+    # SIGNALS TO USE IN QML DESIGN
     isVisible = Signal(bool)
-
     viewIsVisible = Signal(bool)
-
     username = Signal(str)
+    token = Signal(int)
+    ###############################
 
-    @Slot()
-    def on_qml_mouse_clicked(self):
-        print(self)
-        engine.load(os.path.join(os.path.dirname(__file__), "../Qml/Home.qml"))
+    #DEFENITIONS
 
-    @Slot(str, str)
-    def checkLogin(self, user, passw):
+    @Slot(str, str, bool)
+    def checkLogin(self, user, passw, closeWindow):
+        #API URL
         url = 'http://192.168.4.231:48935/api/Users/Login'
-
+        #HEADERS
         headers = {'content-type':'application/json'}
-
+        #BODY TO POST
         body = {
             'Username': user,
             'Password': passw
         }
-
+        #STRINGIFY JSON BODY FOR API
         data=json.dumps(body, separators=(',',':'))
-
+        #REQUEST POST FOR LOGIN
         r=requests.post(url=url, data=data, headers=headers)
+        #SAVE TOKEN
+        self.token = int(r.text)
+        print(self.token) # USED FOR CHECKING # SAVE FOR LATER
 
-        print(r.text)
-
-    @Slot(bool)
-    def closewindow(self, isChecked):
-        self.isVisible.emit(isChecked)
+        #WINDOW ON CHANGE IF USER LOGIN RETURNS A TOKEN
+        if self.token != "0" and self.token != "" and self.token != "null":
+            engine.load(os.path.join(os.path.dirname(__file__), "../Qml/Home.qml"))
+            self.isVisible.emit(closeWindow)
 
     @Slot(bool)
     def changeview(self, viewvisible):
         print("Is view visible:", viewvisible)
         self.viewIsVisible.emit(viewvisible)
 
+################################################################################################
+#                                       RUNNING CODE                                           #
+################################################################################################
 
 if __name__ == "__main__":
     
