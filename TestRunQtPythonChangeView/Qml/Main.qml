@@ -109,8 +109,7 @@ ApplicationWindow{
         anchors.topMargin: 10
         anchors.horizontalCenter: parent.horizontalCenter
         onPressed: {
-            ConMain.on_qml_mouse_clicked()
-            ConMain.closewindow(buttonTestForPythonCode.checked)
+            ConMain.changetohome(buttonTestForPythonCode.checked)
         }
     }
 

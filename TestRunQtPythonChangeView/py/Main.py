@@ -52,6 +52,12 @@ class MainWindow(QObject):
         print("Is view visible:", viewvisible)
         self.viewIsVisible.emit(viewvisible)
 
+    #code til at hurtig komme ind på home siden slet ending vi afliværer opgaven 
+    @Slot(bool)
+    def changetohome(self, closeWindow):
+        engine.load(os.path.join(os.path.dirname(__file__), "../Qml/Home.qml"))
+        self.isVisible.emit(closeWindow)
+
 ################################################################################################
 #                                       RUNNING CODE                                           #
 ################################################################################################
