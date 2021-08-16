@@ -141,7 +141,8 @@ ApplicationWindow{
             anchors.fill: parent
 
             onClicked: {
-                console.log("Mouse click pressed"); 
+                console.log("Mouse click pressed");
+                ConMain.login(usernameField.text, passwordField.text, buttonLogin.checked) 
             }
         }
     }
