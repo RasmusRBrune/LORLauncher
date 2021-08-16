@@ -27,53 +27,96 @@ ApplicationWindow{
         color: "#212529"
                     
         Text{
-            text: qsTr("LOR")   
-            anchors.top: parent.top                    
-            anchors.left: parent.left    
-            anchors.leftMargin: 5    
+            id: icon
+            text: qsTr("LOR")     
             font.pointSize: parent.height * .5        
             // font.family: "Sans"
+            anchors{
+                top: parent.top                    
+                left: parent.left    
+                leftMargin: 5  
+            }
             color: "#198754"    
+        }
+
+        Button{
+            width: 50
+            text: qsTr("change view")
+            clip: true
+
+            anchors{
+                top: parent.top                    
+                left: icon.right     
+                leftMargin: 5  
+            }
+            onPressed: {
+                console.log(buttonLogin.focus);
+                ConHome.changeview(buttonLogin.focus)
+            }
         }
     }   
 
-    Rectangle {
-        id: body
-        color: "#198754" 
+    Item{
+        id:home
+        height: parent.height -54
         width: parent.width - 240
-        height: parent.height - 162
-        anchors{
-            left: parent.left
-            top: banner.bottom
-        }
+        anchors.top: banner.bottom
+        Rectangle {
+            id: homeBody
+            color: "#198754" 
+            width: parent.width
+            height: parent.height - 108
+            anchors{
+               left: parent.left
+               top: parent.top
+            }
 
-        Text{
-            text: qsTr("Feed")
-            anchors.top: parent.top                    
-            anchors.left: parent.left    
-            anchors.leftMargin: 5    
-            color:"#212529"
-        }
-    } 
+            Text{
+                text: qsTr("Feed")
+                anchors.top: parent.top                    
+                anchors.left: parent.left    
+                anchors.leftMargin: 5    
+                color:"#212529"
+            }
+        } 
 
-    Rectangle {
-        id: footer
-        color: "#212529"  
-        width: parent.width - 240
-        height: 108
-        anchors{
-            left: parent.left
-            top: body.bottom
-        }
+        Rectangle {
+            id: homeFooter
+            color: "#212529"  
+            width: parent.width
+            height: 108
+            anchors{
+                left: parent.left
+                top: body.bottom
+            }
 
-        Text{
-            text: qsTr("Footer")
-            anchors.top: parent.top                    
-            anchors.left: parent.left    
-            anchors.leftMargin: 5    
-            color:"#198754"
+            Text{
+                text: qsTr("Footer")
+                anchors.top: parent.top                    
+                anchors.left: parent.left    
+                anchors.leftMargin: 5    
+                color:"#198754"
+            }
         }
-    } 
+    }
+
+    Item{
+        id:store
+        anchors.topMargin: 10
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.top: buttonLogin.bottom
+        visible: false
+        Rectangle{
+            id: storeview
+            width: 100
+            height: 100
+            color: Material.color(Material.Blue)
+        }
+    }   
+
+
+
+
 
     Rectangle {
         id: friendsList
@@ -103,8 +146,8 @@ ApplicationWindow{
 
         function onViewIsVisible(viewIsVisible){
             console.log(viewIsVisible);
-            view1.visible = !viewIsVisible
-            view2.visible = viewIsVisible
+            home.visible = !viewIsVisible
+            store.visible = viewIsVisible
         }
     }
 }

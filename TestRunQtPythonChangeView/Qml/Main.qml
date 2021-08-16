@@ -12,6 +12,13 @@ ApplicationWindow{
     width: 400
     visible: true
     title: qsTr("login Page")
+    MouseArea {
+        anchors.fill: parent
+
+        onClicked: {
+            buttonLogin.focus = true
+        }
+    }
 
 
     flags: Qt.WindowCloseButtonHint | Qt.WindowMinmizeButtinHint | Qt.CustomizeWindowHint | Qt.MSWindowsFixedSizeDialogHint | Qt.WindowTitleHint
@@ -63,6 +70,13 @@ ApplicationWindow{
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: image.bottom
         anchors.topMargin: 60
+        Keys.onPressed: {
+            if (event.key == Qt.Key_Return) {
+                console.log("Key Enter was pressed");
+                event.accepted = true;
+                ConMain.checkLogin(usernameField.text, passwordField.text, buttonLogin.checked)
+            }
+        }
     }
 
     TextField{
@@ -76,6 +90,13 @@ ApplicationWindow{
         anchors.top: usernameField.bottom
         anchors.topMargin: 10
         echoMode: TextInput.Password
+        Keys.onPressed: {
+            if (event.key == Qt.Key_Return) {
+                console.log("Key Enter was pressed");
+                event.accepted = true;
+                ConMain.checkLogin(usernameField.text, passwordField.text, buttonLogin.checked)
+            }
+        }
     }
 
     CheckBox{
@@ -84,18 +105,44 @@ ApplicationWindow{
         anchors.top: passwordField.bottom
         anchors.topMargin: 10
         anchors.horizontalCenter: parent.horizontalCenter
+        Keys.onPressed: {
+            if (event.key == Qt.Key_Return) {
+                console.log("Key Enter was pressed");
+                event.accepted = true;
+                ConMain.checkLogin(usernameField.text, passwordField.text, buttonLogin.checked)
+            }
+        }
     }
 
     Button{
         id:buttonLogin
         width: 300
+        focus: true
         checked: false
         text: qsTr("Login")
         anchors.top: checkBox.bottom
         anchors.topMargin: 10
         anchors.horizontalCenter: parent.horizontalCenter
-        onPressed: {
-            ConMain.checkLogin(usernameField.text, passwordField.text, buttonLogin.checked)
+        Keys.onPressed: {
+            if (event.key == Qt.Key_Return) {
+                console.log("Key Enter was pressed");
+                event.accepted = true;
+                ConMain.checkLogin(usernameField.text, passwordField.text, buttonLogin.checked)
+            }
+            if (event.key == Qt.Key_Space) {
+                console.log("Key Space was pressed");  
+            }
+        }
+        // onPressed: {                        
+        //     ConMain.checkLogin(usernameField.text, passwordField.text, buttonLogin.checked)
+        // }
+
+        MouseArea {
+            anchors.fill: parent
+
+            onClicked: {
+                console.log("Mouse click pressed"); 
+            }
         }
     }
 
