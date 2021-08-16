@@ -17,9 +17,10 @@ class MainWindow(QObject):
     
     tb = APItoolbox.APItoolbox()
 
-    # SIGNALS TO USE IN QML DESIGN
+    #SIGNALS TO USE IN QML DESIGN
     isVisible = Signal(bool)
     viewIsVisible = Signal(bool)
+    friendsList = Signal(list)
     username = Signal(str)
     userToken = Signal(int)
     ###############################
@@ -32,6 +33,8 @@ class MainWindow(QObject):
         if self.tb.token != "0" and self.tb.token != "" and self.tb.token != "null":
             engine.load(os.path.join(os.path.dirname(__file__), "../Qml/Home.qml"))
             self.isVisible.emit(closeWindow)
+            self.tb.friendsList()
+            
     
 
     @Slot(bool)
@@ -45,6 +48,7 @@ class MainWindow(QObject):
         engine.load(os.path.join(os.path.dirname(__file__), "../Qml/Home.qml"))
         self.isVisible.emit(closeWindow)
 
+
 ################################################################################################
 #                                       RUNNING CODE                                           #
 ################################################################################################
@@ -55,11 +59,12 @@ if __name__ == "__main__":
     home = Home.HomeWindow()
     app = QGuiApplication(sys.argv)
     engine = QQmlApplicationEngine()
-   
+    
+    #VIEW CHANGING
     engine.rootContext().setContextProperty("ConMain",main)
     engine.rootContext().setContextProperty("ConHome",home)
+    #VIEW INITIALIZED
     engine.load(os.path.join(os.path.dirname(__file__), "../Qml/Main.qml"))
     if not engine.rootObjects():
         sys.exit(-1)
     sys.exit(app.exec())
-
