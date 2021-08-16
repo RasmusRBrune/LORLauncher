@@ -44,5 +44,6 @@ class APItoolbox(QObject):
         #REQUEST GET FOR FRIENDSLIST
         r=requests.get(url=url, headers=headers)
         print(r.text)
-        friendsList.append(r.content)
+        friendsList.clear()
+        friendsList.append(r.text)
         print(friendsList.count())
