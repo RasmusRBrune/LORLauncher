@@ -74,7 +74,7 @@ ApplicationWindow{
             if (event.key == Qt.Key_Return) {
                 console.log("Key Enter was pressed");
                 event.accepted = true;
-                ConMain.checkLogin(usernameField.text, passwordField.text, buttonLogin.checked)
+                ConMain.login(usernameField.text, passwordField.text, buttonLogin.checked)
             }
         }
     }
@@ -94,7 +94,7 @@ ApplicationWindow{
             if (event.key == Qt.Key_Return) {
                 console.log("Key Enter was pressed");
                 event.accepted = true;
-                ConMain.checkLogin(usernameField.text, passwordField.text, buttonLogin.checked)
+                ConMain.login(usernameField.text, passwordField.text, buttonLogin.checked)
             }
         }
     }
@@ -109,7 +109,7 @@ ApplicationWindow{
             if (event.key == Qt.Key_Return) {
                 console.log("Key Enter was pressed");
                 event.accepted = true;
-                ConMain.checkLogin(usernameField.text, passwordField.text, buttonLogin.checked)
+                ConMain.login(usernameField.text, passwordField.text, buttonLogin.checked)
             }
         }
     }
@@ -127,14 +127,14 @@ ApplicationWindow{
             if (event.key == Qt.Key_Return) {
                 console.log("Key Enter was pressed");
                 event.accepted = true;
-                ConMain.checkLogin(usernameField.text, passwordField.text, buttonLogin.checked)
+                ConMain.login(usernameField.text, passwordField.text, buttonLogin.checked)
             }
             if (event.key == Qt.Key_Space) {
                 console.log("Key Space was pressed");  
             }
         }
         // onPressed: {                        
-        //     ConMain.checkLogin(usernameField.text, passwordField.text, buttonLogin.checked)
+        //     ConMain.login(usernameField.text, passwordField.text, buttonLogin.checked)
         // }
 
         MouseArea {

@@ -1,3 +1,4 @@
+import APItoolbox
 import sys
 import os
 import requests
@@ -14,45 +15,31 @@ class MainWindow(QObject):
     def __init__(self):
         QObject.__init__(self)
     
+    tb = APItoolbox.APItoolbox()
+
     # SIGNALS TO USE IN QML DESIGN
     isVisible = Signal(bool)
     viewIsVisible = Signal(bool)
     username = Signal(str)
-    token = Signal(int)
+    userToken = Signal(int)
     ###############################
 
     #DEFENITIONS
-
     @Slot(str, str, bool)
-    def checkLogin(self, user, passw, closeWindow):
-        #API URL
-        url = 'http://192.168.4.231:48935/api/Users/Login'
-        #HEADERS
-        headers = {'content-type':'application/json'}
-        #BODY TO POST
-        body = {
-            'Username': user,
-            'Password': passw
-        }
-        #STRINGIFY JSON BODY FOR API
-        data=json.dumps(body, separators=(',',':'))
-        #REQUEST POST FOR LOGIN
-        r=requests.post(url=url, data=data, headers=headers)
-        #SAVE TOKEN
-        self.token = int(r.text)
-        print(self.token) # USED FOR CHECKING # SAVE FOR LATER
-
+    def login(self, user, passw, closeWindow):
+        self.tb.checkLogin(user, passw)
         #WINDOW ON CHANGE IF USER LOGIN RETURNS A TOKEN
-        if self.token != "0" and self.token != "" and self.token != "null":
+        if self.tb.token != "0" and self.tb.token != "" and self.tb.token != "null":
             engine.load(os.path.join(os.path.dirname(__file__), "../Qml/Home.qml"))
             self.isVisible.emit(closeWindow)
+    
 
     @Slot(bool)
     def changeview(self, viewvisible):
         print("Is view visible:", viewvisible)
         self.viewIsVisible.emit(viewvisible)
 
-    #code til at hurtig komme ind på home siden slet ending vi afliværer opgaven 
+    #FAST ACCESS CODE TEST ENVIRONMENT
     @Slot(bool)
     def changetohome(self, closeWindow):
         engine.load(os.path.join(os.path.dirname(__file__), "../Qml/Home.qml"))
