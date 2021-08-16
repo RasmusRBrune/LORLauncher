@@ -95,7 +95,7 @@ ApplicationWindow{
         anchors.topMargin: 10
         anchors.horizontalCenter: parent.horizontalCenter
         onPressed: {
-            ConMain.checkLogin(usernameField.text, passwordField.text, buttonLogin.checked)
+            ConMain.login(usernameField.text, passwordField.text, buttonLogin.checked)
         }
     }
 

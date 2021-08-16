@@ -1,3 +1,4 @@
+import APItoolbox
 import sys
 import os
 import requests
@@ -14,20 +15,31 @@ class MainWindow(QObject):
     def __init__(self):
         QObject.__init__(self)
     
+    tb = APItoolbox.APItoolbox()
+
     # SIGNALS TO USE IN QML DESIGN
     isVisible = Signal(bool)
     viewIsVisible = Signal(bool)
     username = Signal(str)
-    token = Signal(int)
+    userToken = Signal(int)
     ###############################
 
     #DEFENITIONS
+    @Slot(str, str, bool)
+    def login(self, user, passw, closeWindow):
+        self.tb.checkLogin(user, passw)
+        #WINDOW ON CHANGE IF USER LOGIN RETURNS A TOKEN
+        if self.tb.token != "0" and self.tb.token != "" and self.tb.token != "null":
+            engine.load(os.path.join(os.path.dirname(__file__), "../Qml/Home.qml"))
+            self.isVisible.emit(closeWindow)
+    
+
     @Slot(bool)
     def changeview(self, viewvisible):
         print("Is view visible:", viewvisible)
         self.viewIsVisible.emit(viewvisible)
 
-    #code til at hurtig komme ind på home siden slet ending vi afliværer opgaven 
+    #FAST ACCESS CODE TEST ENVIRONMENT
     @Slot(bool)
     def changetohome(self, closeWindow):
         engine.load(os.path.join(os.path.dirname(__file__), "../Qml/Home.qml"))

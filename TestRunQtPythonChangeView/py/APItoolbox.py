@@ -15,8 +15,7 @@ class APItoolbox(QObject):
     def __init__(self):
         QObject.__init__(self)
     #DEFINITIONS
-    def checkLogin(self, user, passw, closeWindow):
-        engine = QQmlApplicationEngine()
+    def checkLogin(self, user, passw):
         #API URL
         url = 'http://192.168.4.231:48935/api/Users/Login'
         #HEADERS
@@ -32,9 +31,4 @@ class APItoolbox(QObject):
         r=requests.post(url=url, data=data, headers=headers)
         #SAVE TOKEN
         self.token = int(r.text)
-        print(self.token) # USED FOR CHECKING # SAVE FOR LATER
-
-        #WINDOW ON CHANGE IF USER LOGIN RETURNS A TOKEN
-        if self.token != "0" and self.token != "" and self.token != "null":
-            engine.load(os.path.join(os.path.dirname(__file__), "../Qml/Home.qml"))
-            self.isVisible.emit(closeWindow)
+        #print(self.token) # USED FOR CHECKING # SAVE FOR LATER
