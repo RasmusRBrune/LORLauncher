@@ -12,12 +12,17 @@ class HomeWindow(QObject):
     def __init__(self):
         QObject.__init__(self)
 
-
+    #SIGNALS TO USE IN QML DESIGN
     viewIsVisible = Signal(bool)
+    friendsList = Signal(list)
 
 
-
+    #DEFENITIONS
     @Slot(bool)
     def changeview(self, viewvisible):
         print("Is view visible:", viewvisible)
         self.viewIsVisible.emit(viewvisible)
+
+    @Slot(list)
+    def showfriendsList(friendsList):
+        print(friendsList)
