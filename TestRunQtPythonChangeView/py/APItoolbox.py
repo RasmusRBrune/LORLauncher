@@ -46,4 +46,4 @@ class APItoolbox(QObject):
         print(r.text)
         friendsList.clear()
         friendsList.append(r.text)
-        print(friendsList.count())
+        print(friendsList.count("Xaduh"))
