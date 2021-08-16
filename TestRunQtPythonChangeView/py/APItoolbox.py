@@ -43,7 +43,8 @@ class APItoolbox(QObject):
         headers = {'content-type':'application/json'}
         #REQUEST GET FOR FRIENDSLIST
         r=requests.get(url=url, headers=headers)
-        print(r.text)
+        r=json.loads(r.text)
+        print(r)
         friendsList.clear()
-        friendsList.append(r.text)
-        print(friendsList.count("Xaduh"))
+        friendsList.append(r)
+        print(friendsList)
