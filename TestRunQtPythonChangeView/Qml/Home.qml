@@ -119,16 +119,47 @@ ApplicationWindow{
 
 
     Rectangle {
+        
         id: friendsList
         color: "#212529"
         visible: true
-        width: 240
+        width: 20
         height: parent.height
         anchors{
             right: parent.right
             top: parent.top   
         }
         
+        PropertyAnimation { 
+            id: animationSlideMenuIn;
+            target: friendsList;
+            property: "width";
+            to: 240;
+            duration: 200
+        }
+
+        PropertyAnimation { 
+            id: animationSlideMenuOut;
+            target: friendsList;
+            property: "width";
+            to: 20;
+            duration: 200
+        }
+        
+        MouseArea{
+            anchors.fill: parent
+            hoverEnabled: true
+            onPressed:{
+                if (friendsList.width == 20) {
+                    animationSlideMenuIn.running = true
+                } else {
+                    animationSlideMenuOut.running = true
+                }   
+                
+            }
+            
+        }
+
         Item{
 
         }

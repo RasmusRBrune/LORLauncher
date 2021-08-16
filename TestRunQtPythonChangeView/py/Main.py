@@ -20,6 +20,7 @@ class MainWindow(QObject):
     # SIGNALS TO USE IN QML DESIGN
     isVisible = Signal(bool)
     viewIsVisible = Signal(bool)
+    friendsList = Signal(list)
     username = Signal(str)
     userToken = Signal(int)
     ###############################
