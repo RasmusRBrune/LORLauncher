@@ -32,3 +32,17 @@ class APItoolbox(QObject):
         #SAVE TOKEN
         self.token = int(r.text)
         #print(self.token) # USED FOR CHECKING # SAVE FOR LATER
+
+    def friendsList(self):
+        tknId = self.token
+        print(tknId)
+        friendsList=[]
+        #API URL
+        url = 'http://192.168.4.231:48935/api/FriendsList/Friends/'+str(tknId)
+        #HEADERS
+        headers = {'content-type':'application/json'}
+        #REQUEST GET FOR FRIENDSLIST
+        r=requests.get(url=url, headers=headers)
+        print(r.text)
+        friendsList.append(r.content)
+        print(friendsList.count())
