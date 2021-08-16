@@ -133,8 +133,9 @@ ApplicationWindow{
                 console.log("Key Space was pressed");  
             }
         }
-        // onPressed: {                        
-        //     ConMain.login(usernameField.text, passwordField.text, buttonLogin.checked)
+        // onPressed: {    
+        //     console.log("Error");                       
+        //     //ConMain.login(usernameField.text, passwordField.text, buttonLogin.checked)
         // }
 
         MouseArea {
