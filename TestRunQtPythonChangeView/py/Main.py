@@ -33,6 +33,8 @@ class MainWindow(QObject):
             self.isVisible.emit(closeWindow)
             self.tb.friendsList()
             
+            home.getfriendsList(self.tb.fList)
+            
     
 
     @Slot(bool)

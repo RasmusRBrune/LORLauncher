@@ -36,7 +36,7 @@ class APItoolbox(QObject):
     def friendsList(self):
         tknId = self.token
         print(tknId)
-        friendsList=[]
+        self.fList=[]
         #API URL
         url = 'http://192.168.4.231:48935/api/FriendsList/Friends/'+str(tknId)
         #HEADERS
@@ -45,6 +45,6 @@ class APItoolbox(QObject):
         r=requests.get(url=url, headers=headers)
         r=json.loads(r.text)
         print(r)
-        friendsList.clear()
-        friendsList.append(r)
-        print(friendsList)
+        self.fList.clear()
+        self.fList.append(r)
+        print(self.fList)

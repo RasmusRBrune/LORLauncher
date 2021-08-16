@@ -1,7 +1,5 @@
-import sys
-import os
-import requests
 import json
+import APItoolbox
 
 from PySide6.QtGui import *
 from PySide6.QtQml import QQmlApplicationEngine
@@ -23,6 +21,7 @@ class HomeWindow(QObject):
         print("Is view visible:", viewvisible)
         self.viewIsVisible.emit(viewvisible)
 
-    @Slot(list)
-    def showfriendsList(friendsList):
-        print(friendsList)
+    @Slot()
+    def getfriendsList(self,fList):
+        self.friendsList = fList
+        print(self.friendsList)
