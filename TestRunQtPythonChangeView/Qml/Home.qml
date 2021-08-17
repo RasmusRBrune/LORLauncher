@@ -40,6 +40,7 @@ ApplicationWindow{
         }
 
         Button{
+            id: buttonL
             width: 50
             text: qsTr("change view")
             clip: true
@@ -87,7 +88,7 @@ ApplicationWindow{
             height: 108
             anchors{
                 left: parent.left
-                top: body.bottom
+                top: homeBody.bottom
             }
 
             Text{
@@ -104,7 +105,7 @@ ApplicationWindow{
         id:store
         anchors.topMargin: 10
         anchors.horizontalCenter: parent.horizontalCenter
-        anchors.top: buttonLogin.bottom
+        anchors.top: buttonL.bottom
         visible: false
         Rectangle{
             id: storeview
