@@ -1,6 +1,7 @@
 import json
 import APItoolbox
 
+from PySide6.QtQuick import QQuickItem
 from PySide6.QtGui import *
 from PySide6.QtQml import QQmlApplicationEngine
 from PySide6.QtCore import *
@@ -25,3 +26,7 @@ class HomeWindow(QObject):
     def getfriendsList(self,fList):
         self.friendsList = fList
         print(self.friendsList)
+
+    @SLOT(QQuickItem)
+    def showfriendsList(self,friendsView):
+        print(friendsView)
