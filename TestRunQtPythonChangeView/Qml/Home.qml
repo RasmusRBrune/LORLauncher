@@ -105,7 +105,7 @@ ApplicationWindow{
         id:store
         anchors.topMargin: 10
         anchors.horizontalCenter: parent.horizontalCenter
-        anchors.top: buttonL.bottom
+        anchors.top: buttonL.bottom // ?? no button is a parent og this element ??? Need hotfix!!
         visible: false
         Rectangle{
             id: storeview
