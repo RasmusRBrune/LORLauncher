@@ -1,12 +1,8 @@
-import sys
-import os
 import requests
 import json
-import Home
 
-#from TestRunQtPythonChangeView.py.Home import HomeWindow
+
 from PySide6.QtGui import *
-from PySide6.QtQml import QQmlApplicationEngine
 from PySide6.QtCore import *
 from PySide6.QtWidgets import *
 
@@ -44,7 +40,22 @@ class APItoolbox(QObject):
         #REQUEST GET FOR FRIENDSLIST
         r=requests.get(url=url, headers=headers)
         r=json.loads(r.text)
-        print(r)
+        #print(r)
         self.fList.clear()
         self.fList.append(r)
-        print(self.fList)
+        #print(self.fList)
+
+    def pendingRequest(self):
+        pass
+
+    def accepctRequest(self):
+        pass
+
+    def ignoreRequest(self):
+        pass
+
+    def incomingMessage(self):
+        pass
+
+    def outgoingMessage(self):
+        pass
