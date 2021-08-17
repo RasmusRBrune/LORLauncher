@@ -44,7 +44,22 @@ class APItoolbox(QObject):
         #REQUEST GET FOR FRIENDSLIST
         r=requests.get(url=url, headers=headers)
         r=json.loads(r.text)
-        print(r)
+        #print(r)
         self.fList.clear()
         self.fList.append(r)
-        print(self.fList)
+        #print(self.fList)
+
+    def pendingRequest(self):
+        pass
+
+    def accepctRequest(self):
+        pass
+
+    def ignoreRequest(self):
+        pass
+
+    def incomingMessage(self):
+        pass
+
+    def outgoingMessage(self):
+        pass
