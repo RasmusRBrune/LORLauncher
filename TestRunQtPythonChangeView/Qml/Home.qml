@@ -2,6 +2,7 @@ import QtQuick 2.15
 import QtQuick.Window 2.15
 import QtQuick.Controls 2.15
 import QtQuick.Controls.Material 2.15
+// import QtQuick.Controls.Styles 1.2
 
 ApplicationWindow{
     id: window
@@ -12,13 +13,13 @@ ApplicationWindow{
     height: 600
     width: 1120
     visible: true
-    title: qsTr("Home Page")
+    title: qsTr("Home Page")    
 
     color: "#198754"    
-
+    
     Rectangle {
         id: banner
-        width: parent.width - 240
+        width: parent.width 
         height: 54
         anchors{
             left: parent.left
@@ -40,9 +41,9 @@ ApplicationWindow{
         }
 
         Button{
-            width: 50
-            text: qsTr("change view")
-            clip: true
+            id: buttonHome
+            width: 100
+            text: qsTr("Home")
 
             anchors{
                 top: parent.top                    
@@ -50,29 +51,118 @@ ApplicationWindow{
                 leftMargin: 5  
             }
             onPressed: {
-                console.log(buttonLogin.focus);
-                ConHome.changeview(buttonLogin.focus)
+                ConHome.changeview("buttonHome")
             }
         }
+
+        Button{
+            id: buttonStore
+            width: 100
+            text: qsTr("Store")
+
+            anchors{
+                top: parent.top                    
+                left: buttonHome.right     
+                leftMargin: 5  
+            }
+            onPressed: {
+                ConHome.changeview("buttonStore")
+            }
+        }
+
+        AbstractButton{
+            id: buttonFriends
+            height: 25
+            width: 25
+            
+            anchors{
+                top: parent.top                    
+                right: parent.right    
+                rightMargin: 5  
+            }
+            icon{
+                source: "../Image/user-solid.svg"
+                width: parent.width
+                height: parent.height
+                color: mouseArea.containsMouse ? "#ffffff" : "#212529"
+            }
+            scale: mouseArea.containsMouse ? 0.8 : 1.0
+            smooth: mouseArea.containsMouse
+
+            MouseArea {
+                id: mouseArea
+                anchors.fill: parent   
+                anchors.margins: -10
+                hoverEnabled: true             
+                onClicked: {
+                    console.log("Mouse click pressed"); 
+                }                
+            }
+        }
+
+        Button{
+            id: logout
+            width: 100
+            text: qsTr("Logout")
+            
+            anchors{
+                top: parent.top                    
+                right: buttonFriends.right     
+                rightMargin: 5  
+            }
+            onPressed: {
+                ConHome.changeview("buttonStore")
+            }
+        }  
+
+        // Image{
+        //     id: buttonFriends
+        //     height: 25
+        //     width: 25
+        //     icon{
+        //         source: "../Image/user-solid.svg"
+        //         color: mouseArea.containsMouse ? "#ffffff" : "#198754"
+        //     }
+            
+        //     anchors{
+        //         top: parent.top                    
+        //         right: parent.right    
+        //         rightMargin: 5  
+        //     }
+        //     scale: mouseArea.containsMouse ? 0.8 : 1.0
+        //     smooth: mouseArea.containsMouse
+            
+
+        //     MouseArea {
+        //         id: mouseArea
+        //         anchors.fill: parent   
+        //         anchors.margins: -10
+        //         hoverEnabled: true             
+        //         onClicked: {
+        //             console.log("Mouse click pressed"); 
+        //         }                
+        //     }
+        // }      
     }   
 
     Item{
         id:home
         height: parent.height -54
-        width: parent.width - 240
+        width: parent.width
         anchors.top: banner.bottom
+        visible: true
         Rectangle {
             id: homeBody
             color: "#198754" 
             width: parent.width
-            height: parent.height - 108
+            height: parent.height - 82
             anchors{
                left: parent.left
                top: parent.top
             }
 
             Text{
-                text: qsTr("Feed")
+                text: qsTr("Home")
                 anchors.top: parent.top                    
                 anchors.left: parent.left    
                 anchors.leftMargin: 5    
@@ -84,14 +174,15 @@ ApplicationWindow{
             id: homeFooter
             color: "#212529"  
             width: parent.width
-            height: 108
+            // 108
+            height: 82
             anchors{
                 left: parent.left
-                top: body.bottom
+                top: homeBody.bottom
             }
 
             Text{
-                text: qsTr("Footer")
+                text: qsTr("Footer home")
                 anchors.top: parent.top                    
                 anchors.left: parent.left    
                 anchors.leftMargin: 5    
@@ -102,20 +193,49 @@ ApplicationWindow{
 
     Item{
         id:store
-        anchors.topMargin: 10
-        anchors.horizontalCenter: parent.horizontalCenter
-        anchors.top: buttonLogin.bottom
+        height: parent.height -54
+        width: parent.width
+        anchors.top: banner.bottom
         visible: false
-        Rectangle{
-            id: storeview
-            width: 100
-            height: 100
-            color: Material.color(Material.Blue)
+        Rectangle {
+            id: storeBody
+            color: "#198754" 
+            width: parent.width
+            height: parent.height - 82
+            anchors{
+               left: parent.left
+               top: parent.top
+            }
+
+            Text{
+                text: qsTr("Store")
+                anchors.top: parent.top                    
+                anchors.left: parent.left    
+                anchors.leftMargin: 5    
+                color:"#212529"
+            }
+        } 
+
+        Rectangle {
+            id: storeFooter
+            color: "#212529"  
+            width: parent.width
+            // 108
+            height: 82
+            anchors{
+                left: parent.left
+                top: storeBody.bottom
+            }
+
+            Text{
+                text: qsTr("Footer store")
+                anchors.top: parent.top                    
+                anchors.left: parent.left    
+                anchors.leftMargin: 5    
+                color:"#198754"
+            }
         }
-    }   
-
-
-
+    }
 
 
     Rectangle {
@@ -124,10 +244,11 @@ ApplicationWindow{
         color: "#212529"
         visible: true
         width: 20
-        height: parent.height
+        // 162
+        height: parent.height - 54
         anchors{
             right: parent.right
-            top: parent.top   
+            top: banner.bottom   
         }
         
         PropertyAnimation { 
@@ -155,9 +276,7 @@ ApplicationWindow{
                 } else {
                     animationSlideMenuOut.running = true
                 }   
-                
             }
-            
         }
 
         Item{
@@ -176,10 +295,15 @@ ApplicationWindow{
     Connections{
         target: ConHome
 
-        function onViewIsVisible(viewIsVisible){
-            console.log(viewIsVisible);
-            home.visible = !viewIsVisible
-            store.visible = viewIsVisible
+        function onViewVisible(viewVisible){
+            console.log(viewVisible);
+            if(viewVisible == "buttonHome"){
+                store.visible = false
+                home.visible = true
+            } else if(viewVisible == "buttonStore"){
+                home.visible = false
+                store.visible = true
+            }
         }
     }
 }
@@ -230,7 +354,7 @@ ApplicationWindow{
 //     Connections{
 //         target: ConHome
 
-//         function onViewIsVisible(viewIsVisible){
+//         function ChangeView(viewIsVisible){
 //             console.log(viewIsVisible);
 //             view1.visible = !viewIsVisible
 //             view2.visible = viewIsVisible

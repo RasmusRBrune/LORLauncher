@@ -13,11 +13,12 @@ class HomeWindow(QObject):
         QObject.__init__(self)
 
 
-    viewIsVisible = Signal(bool)
+    viewVisible = Signal(str)
 
 
 
-    @Slot(bool)
+    @Slot(str)
     def changeview(self, viewvisible):
         print("Is view visible:", viewvisible)
-        self.viewIsVisible.emit(viewvisible)
+        #self.viewVisible = viewvisible
+        self.viewVisible.emit(viewvisible)
