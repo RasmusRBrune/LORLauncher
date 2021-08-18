@@ -5,7 +5,6 @@ import requests
 import json
 import Home
 
-#from TestRunQtPythonChangeView.py.Home import HomeWindow
 from PySide6.QtGui import *
 from PySide6.QtQml import QQmlApplicationEngine
 from PySide6.QtCore import *
@@ -20,7 +19,6 @@ class MainWindow(QObject):
     #SIGNALS TO USE IN QML DESIGN
     isVisible = Signal(bool)
     viewIsVisible = Signal(bool)
-    friendsList = Signal(list)
     username = Signal(str)
     userToken = Signal(int)
     ###############################
@@ -34,6 +32,8 @@ class MainWindow(QObject):
             engine.load(os.path.join(os.path.dirname(__file__), "../Qml/Home.qml"))
             self.isVisible.emit(closeWindow)
             self.tb.friendsList()
+            
+            home.getfriendsList(self.tb.fList)
             
     
 

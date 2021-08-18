@@ -239,7 +239,6 @@ ApplicationWindow{
 
 
     Rectangle {
-        
         id: friendsList
         color: "#212529"
         visible: true
@@ -276,11 +275,13 @@ ApplicationWindow{
                 } else {
                     animationSlideMenuOut.running = true
                 }   
+                ConHome.showfriendsList(friendsView)
             }
         }
 
         Item{
-
+            id:itemToFriendsView
+            objectName: friendsView
         }
 
         Text{
