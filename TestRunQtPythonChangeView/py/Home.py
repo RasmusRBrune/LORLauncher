@@ -1,7 +1,7 @@
 import json
 import APItoolbox
 
-from PySide6.QtQuick import QQuickItem
+from PySide6.QtQuick import QQuickItem, QQuickView
 from PySide6.QtGui import *
 from PySide6.QtQml import QQmlApplicationEngine
 from PySide6.QtCore import *
@@ -11,10 +11,13 @@ class HomeWindow(QObject):
     def __init__(self):
         QObject.__init__(self)
 
+    
+
     #SIGNALS TO USE IN QML DESIGN
     viewIsVisible = Signal(bool)
-    friendsList = Signal(list)
-
+    listSinal = Signal(str)
+    friendsList = []
+    usname = []
 
     #DEFENITIONS
     @Slot(bool)
@@ -25,8 +28,17 @@ class HomeWindow(QObject):
     @Slot()
     def getfriendsList(self,fList):
         self.friendsList = fList
-        print(self.friendsList)
+        
+        self.getusername()
 
-    @SLOT(QQuickItem)
-    def showfriendsList(self,friendsView):
-        print(friendsView)
+    @Slot()
+    def getusername(self):
+        for elem in self.friendsList:
+            for user in elem:
+                self.name = user
+                self.usname.append(self.name['username'])
+        self.listSinal.emit(str(self.usname)) 
+
+    # @pyqtProperty(list)
+    # def showfriendsList(self):
+    #     return self.usname

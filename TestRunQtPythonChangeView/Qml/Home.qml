@@ -155,14 +155,17 @@ ApplicationWindow{
                 } else {
                     animationSlideMenuOut.running = true
                 }   
-                ConHome.showfriendsList(friendsView)
             }
             
         }
 
         Item{
             id:itemToFriendsView
-            objectName: friendsView
+
+            Text {
+                id: listview
+                text: qsTr("")
+            }
         }
 
         Text{
@@ -182,12 +185,20 @@ ApplicationWindow{
             home.visible = !viewIsVisible
             store.visible = viewIsVisible
         }
+
+        
+        function onListSinal(fList) {
+            console.log(fList);
+            listview.text = qsTr(fList)
+            
+        }
+
     }
 }
 
 
 //     Button{
-//         id:buttonLogin
+//         id:buttonLogin 
 //         width: 300
 //         text: qsTr("change view")
 //         checked: true
