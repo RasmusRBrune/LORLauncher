@@ -36,5 +36,7 @@ class HomeWindow(QObject):
         for elem in self.friendsList:
             for user in elem:
                 self.name = user
-                self.usname.append(self.name['username'])
-        self.listSinal.emit(str(self.usname)) 
+                self.listSinal.emit(str(self.name['username']))
+            #self.listSinal.emit(str(self.usname)) 
+               
+        

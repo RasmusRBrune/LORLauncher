@@ -240,7 +240,7 @@ ApplicationWindow{
 
     Rectangle {
         id: friendsList
-        color: "#212529"
+        color: "#4caf50"
         visible: true
         width: 20
         // 162
@@ -278,21 +278,69 @@ ApplicationWindow{
             }
         }
 
-        Item{
-            id:itemToFriendsView
-
-            Text {
-                id: listview
-                text: qsTr("")
-            }
-        }
-
         Text{
             text: qsTr("User")
             anchors.top: parent.top                    
             anchors.left: parent.left    
             anchors.leftMargin: 5    
             color:"#198754"
+        }
+        Rectangle {
+            id: container
+            width: 200
+            height: 250
+            color: parent.color
+            
+            ListModel {
+                id: friendsModel
+                ListElement { 
+                    name: "" 
+                    
+                }
+                /*ListElement { name: "Parrot"; size: "Small" }
+                ListElement { name: "Guinea pig"; size: "Small" }
+                ListElement { name: "Dog"; size: "Medium" }
+                ListElement { name: "Cat"; size: "Medium" }
+                ListElement { name: "Elephant"; size: "Large" }*/
+            }
+
+     //     The delegate for each section header
+            Component {
+                id: sectionHeading
+                Rectangle {
+                    width: container.width
+                    height: childrenRect.height
+                    color: "lightsteelblue"
+
+                    Text {
+                        text: section
+                        font.bold: true
+                        font.pointSize: 25
+                        color: "#303030"
+                    }
+                }
+            }
+
+            ListView {
+                anchors.fill: parent
+                model: friendsModel
+                delegate: Text { 
+                    text: name
+                    MouseArea{
+                        anchors.fill: parent
+                        width: parent.width
+                        height: parent.width
+
+                        onClicked:{console.log(name)}
+
+                    }
+                
+                }
+
+                /*section.property: "size"
+                section.criteria: ViewSection.FullString
+                section.delegate: sectionHeading*/
+            }
         }
     }
 
@@ -313,8 +361,7 @@ ApplicationWindow{
         
         function onListSinal(fList) {
             console.log(fList);
-            listview.text = qsTr(fList)
-            
+            friendsModel.append({"name": fList})            
         }
 
     }
