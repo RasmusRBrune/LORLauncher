@@ -2,7 +2,11 @@ import QtQuick 2.15
 import QtQuick.Window 2.15
 import QtQuick.Controls 2.15
 import QtQuick.Controls.Material 2.15
+// import QtLocation 5.15
+import Qt5Compat.GraphicalEffects
+// import "controls" as Awesome
 // import QtQuick.Controls.Styles 1.2
+import QtQuick.Layouts 2.15
 
 ApplicationWindow{
     id: window
@@ -28,28 +32,28 @@ ApplicationWindow{
         color: "#212529"
                     
         Text{
-            id: icon
-            text: qsTr("LOR")     
-            font.pointSize: parent.height * .5        
-            // font.family: "Sans"
+            id: icon     
             anchors{
                 top: parent.top                    
                 left: parent.left    
                 leftMargin: 5  
             }
+            text: qsTr("LOR")     
+            font.pointSize: parent.height * .5   
+            // font.family: "Sans"
             color: "#198754"    
         }
 
         Button{
             id: buttonHome
             width: 100
-            text: qsTr("Home")
 
             anchors{
                 top: parent.top                    
                 left: icon.right     
                 leftMargin: 5  
             }
+            text: qsTr("Home")
             onPressed: {
                 ConHome.changeview("buttonHome")
             }
@@ -70,30 +74,45 @@ ApplicationWindow{
             }
         }
 
-        AbstractButton{
+        // //
+        //     Her laves kode til en icon som skal fungere som en knap. 
+        //     Man kan også lave det som en button istedet for item.
+        // //        
+
+        Item{
             id: buttonFriends
             height: 25
             width: 25
-            
             anchors{
                 top: parent.top                    
-                right: parent.right    
-                rightMargin: 5  
+                right: parent.right
+                topMargin: 10
+                rightMargin: 10    
             }
-            icon{
+            Image{                
+                anchors.fill: parent                
+                id: fLogo
+                // width: 25
+                // height: 25
+                fillMode: Image.PreserveAspectFit
                 source: "../Image/user-solid.svg"
-                width: parent.width
-                height: parent.height
-                color: mouseArea.containsMouse ? "#ffffff" : "#212529"
             }
-            scale: mouseArea.containsMouse ? 0.8 : 1.0
+
+            ColorOverlay{
+                anchors.fill: fLogo
+                source: fLogo
+                // color: Material.color(Material.Green)
+                color: mouseArea.containsMouse ? "#ffffff" : "#198754"
+            }
+            scale: mouseArea.containsMouse ? 1.0 : 0.8
             smooth: mouseArea.containsMouse
 
             MouseArea {
                 id: mouseArea
                 anchors.fill: parent   
                 anchors.margins: -10
-                hoverEnabled: true             
+                hoverEnabled: true         
+                cursorShape: containsMouse ? Qt.PointingHandCursor : Qt.ArrowCursor    
                 onClicked: {
                     console.log("Mouse click pressed"); 
                 }                
@@ -107,7 +126,7 @@ ApplicationWindow{
             
             anchors{
                 top: parent.top                    
-                right: buttonFriends.right     
+                right: buttonFriends.left     
                 rightMargin: 5  
             }
             onPressed: {
@@ -161,13 +180,47 @@ ApplicationWindow{
                top: parent.top
             }
 
+            // GridLayout{
+            //     anchors.fill: parent
+            //     id: her
+            //     columns: 1
+            //     Text{
+            //         text: qsTr("Home")  
+            //         anchors.leftMargin: 5    
+            //         color:"#212529"
+            //     }
+
+            //     Text{
+            //         text: qsTr("Home")  
+            //         anchors.leftMargin: 5    
+            //         color:"#212529"
+            //     }
+
+            //     Text{
+            //         text: qsTr("Home")  
+            //         anchors.leftMargin: 5    
+            //         color:"#212529"
+            //     }
+
+            //     Text{
+            //         text: qsTr("Home")  
+            //         anchors.leftMargin: 5    
+            //         color:"#212529"
+            //     }
+
+            //     Text{
+            //         text: qsTr("Home")  
+            //         anchors.leftMargin: 5    
+            //         color:"#212529"
+            //     }
+            // }
+
             Text{
-                text: qsTr("Home")
-                anchors.top: parent.top                    
-                anchors.left: parent.left    
+                text: qsTr("Home")  
                 anchors.leftMargin: 5    
                 color:"#212529"
             }
+            
         } 
 
         Rectangle {
@@ -309,14 +362,12 @@ ApplicationWindow{
                 store.visible = true
             }
         }
-
         
         function onListSinal(fList) {
             console.log(fList);
             listview.text = qsTr(fList)
             
         }
-
     }
 }
 
