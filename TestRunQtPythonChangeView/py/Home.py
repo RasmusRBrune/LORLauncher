@@ -38,7 +38,3 @@ class HomeWindow(QObject):
                 self.name = user
                 self.usname.append(self.name['username'])
         self.listSinal.emit(str(self.usname)) 
-
-    # @pyqtProperty(list)
-    # def showfriendsList(self):
-    #     return self.usname
