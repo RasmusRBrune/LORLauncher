@@ -376,7 +376,7 @@ ApplicationWindow{
                 model: friendsModel
                 delegate: Text { 
                     text: name
-                    anchors:{
+                    anchors{
                         
                     }
                     font.bold: true
