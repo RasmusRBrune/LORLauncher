@@ -174,7 +174,7 @@ ApplicationWindow{
             id: homeBody
             color: "#198754" 
             width: parent.width
-            height: parent.height - 82
+            height: parent.height - 25
             anchors{
                left: parent.left
                top: parent.top
@@ -228,7 +228,7 @@ ApplicationWindow{
             color: "#212529"  
             width: parent.width
             // 108
-            height: 82
+            height: 25
             anchors{
                 left: parent.left
                 top: homeBody.bottom
@@ -236,9 +236,12 @@ ApplicationWindow{
 
             Text{
                 text: qsTr("Footer home")
-                anchors.top: parent.top                    
-                anchors.left: parent.left    
-                anchors.leftMargin: 5    
+                anchors{
+                    horizontalCenter: parent.horizontalCenter
+                    top: parent.top                    
+                    left: parent.left    
+                    leftMargin: 5  
+                }  
                 color:"#198754"
             }
         }
@@ -254,7 +257,7 @@ ApplicationWindow{
             id: storeBody
             color: "#198754" 
             width: parent.width
-            height: parent.height - 82
+            height: parent.height - 41
             anchors{
                left: parent.left
                top: parent.top
@@ -274,7 +277,7 @@ ApplicationWindow{
             color: "#212529"  
             width: parent.width
             // 108
-            height: 82
+            height: 41
             anchors{
                 left: parent.left
                 top: storeBody.bottom
@@ -297,7 +300,7 @@ ApplicationWindow{
         visible: true
         width: 20
         // 162
-        height: parent.height - 54
+        height: parent.height - 79
         anchors{
             right: parent.right
             top: banner.bottom   
