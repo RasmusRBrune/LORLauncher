@@ -294,7 +294,7 @@ ApplicationWindow{
             ListModel {
                 id: friendsModel
                 ListElement { 
-                    name: "" 
+                    name: qsTr("")
                     
                 }
                 /*ListElement { name: "Parrot"; size: "Small" }
@@ -313,10 +313,7 @@ ApplicationWindow{
                     color: "lightsteelblue"
 
                     Text {
-                        text: section
-                        font.bold: true
-                        font.pointSize: 25
-                        color: "#303030"
+                      
                     }
                 }
             }
@@ -326,13 +323,29 @@ ApplicationWindow{
                 model: friendsModel
                 delegate: Text { 
                     text: name
+                    anchors:{
+                        
+                    }
+                    font.bold: true
+                    font.pointSize: 15
+                    color: "#303030"
                     MouseArea{
                         anchors.fill: parent
                         width: parent.width
                         height: parent.width
 
-                        onClicked:{console.log(name)}
+                        acceptedButtons: Qt.RightButton | Qt.LeftButton 
 
+                        // onClicked:{console.log(name)} // Kun venstre klik. eg. MouseButtons.onClicked: {}  Qt.LeftButton
+                        onClicked: {
+                            if(mouse.button == Qt.RightButton) {
+                                console.log(name);
+                                // skal du finde mouse area og lave en boks ud fra. du kan have "name" med. 
+                            } 
+                            if(mouse.button == Qt.LeftButton) {
+                                console.log("Denne skal vaere tom");
+                            }
+                        } 
                     }
                 
                 }
